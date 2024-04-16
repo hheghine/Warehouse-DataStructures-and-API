@@ -1,7 +1,7 @@
 #ifndef WAREHOUSE_HPP
 # define WAREHOUSE_HPP
 
-/*   color constants   */
+/*   COLOR CONSTANTS   */
 # define WHT "\033[0;37m"
 # define GRN "\033[0;32m"
 # define CYN "\033[0;36m"
@@ -16,12 +16,15 @@
 
 # define CRST "\033[0m"
 
+/*    LIBRARIES    */
 # include <iostream>
+# include <exception>
 # include <vector>
 # include <string>
 # include <map>
 
 # include "AMaterial.hpp"
+
 
 class AMaterial;
 
@@ -32,21 +35,35 @@ class Warehouse {
 	private:
 		map	warehouse;
 	public:
+		/* CONSTRUCTORS */
 		Warehouse();
-		Warehouse(const Warehouse& rhs);
 		~Warehouse();
-
-		Warehouse&	operator= (const Warehouse& rhs);
-
+		/* NO COPY OPTION */
+		Warehouse(const Warehouse& rhs) = delete;
+		Warehouse&	operator= (const Warehouse& rhs) = delete;
+	public:
+		/* EXCEPTION CLASS */
+		class ExchangeException : public std::exception {
+			public:
+				const char*	what() const throw();
+		};
+	public:
+		/* MATERIAL MANIPULATIONS */
 		void	learnMaterial(AMaterial* material);
 		void	addMaterial(const std::string& material, const size_t quantity);
 		void	removeMaterial(const std::string& material, const size_t quantity);
 
-		const map&	getMap() const;
+		/* GETTERS */
+		size_t	getMaterialQuantity(const std::string& material) const;
+		size_t	getMaterialCapacity(const std::string& material) const;
 
-		void	notifyWarning() const;
+		/* HELPER METHODS */
+		bool		isKnownMaterial(const std::string& material) const;
+		const map&	getMap() const;
+		void		notifyUnknown() const;
 };
 
 std::ostream&	operator<<(std::ostream& out, const Warehouse& wh);
+void			materialExchange(const std::string& material, Warehouse& from, Warehouse& to, size_t quantity);
 
 #endif

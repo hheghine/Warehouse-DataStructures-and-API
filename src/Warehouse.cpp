@@ -8,15 +8,9 @@ Warehouse::~Warehouse() {
 	warehouse.clear();
 }
 
-Warehouse::Warehouse(const Warehouse& rhs)
+const char*	Warehouse::ExchangeException::what() const throw()
 {
-	warehouse = rhs.warehouse;
-}
-
-Warehouse&	Warehouse::operator= (const Warehouse& rhs)
-{
-	warehouse = rhs.warehouse;
-	return *this;
+	return ("[ warehouse exception ] impossible exchange");
 }
 
 void	Warehouse::learnMaterial(AMaterial* material)
@@ -30,7 +24,7 @@ void	Warehouse::addMaterial(const std::string& material, const size_t quantity)
 	if (warehouse.find(material) != warehouse.end())
 		warehouse[material]->addQuantity(quantity);
 	else
-		notifyWarning();
+		notifyUnknown();
 }
 
 void	Warehouse::removeMaterial(const std::string& material, const size_t quantity)
@@ -38,12 +32,29 @@ void	Warehouse::removeMaterial(const std::string& material, const size_t quantit
 	if (warehouse.find(material) != warehouse.end())
 		warehouse[material]->reduceQuantity(quantity);
 	else
-		notifyWarning();
+		notifyUnknown();
 }
 
-void	Warehouse::notifyWarning() const
+size_t	Warehouse::getMaterialQuantity(const std::string& material) const
 {
-	std::cout << YLW " [ ⚠ warning ] unknown material" CRST << std::endl;
+	return warehouse.find(material)->second->getQuantity();
+}
+
+size_t	Warehouse::getMaterialCapacity(const std::string& material) const
+{
+	return warehouse.find(material)->second->getMaxCapacity();
+}
+
+bool	Warehouse::isKnownMaterial(const std::string& material) const
+{
+	if (warehouse.find(material) == warehouse.end())
+		return false;
+	return true;
+}
+
+void	Warehouse::notifyUnknown() const
+{
+	std::cout << YLW " [ ⚠ warning ]" CRST "\t\tunknown material" CRST << std::endl;
 }
 
 const map&	Warehouse::getMap() const
@@ -63,6 +74,25 @@ std::ostream&	operator<<(std::ostream& out, const Warehouse& wh)
 		<< CRST "Max capacity: \t\t" BCYN << (it->second)->getMaxCapacity() << std::endl \
 		<< CRST "Total quantity: \t" BCYN << (it->second)->getQuantity() << CRST << std::endl;
 	}
-	out << BGRY "+--------------------------------------------------------------------------------------+\n" CRST;
+	out << BGRY "+--------------------------------------------------------------------------------------+\n\n" CRST;
 	return out;
+}
+
+void	materialExchange(const std::string& material, Warehouse& from, Warehouse& to, size_t quantity)
+{
+	size_t from_quantity = from.getMaterialQuantity(material);
+	if (!from_quantity || from_quantity < quantity)
+		throw Warehouse::ExchangeException();
+	if (!to.isKnownMaterial(material))
+		to.learnMaterial((from.getMap()).find(material)->second);
+	size_t available = to.getMaterialCapacity(material) - to.getMaterialQuantity(material);
+	if (available < quantity)
+	{
+		std::cout << YLW " [ ⚠ warning ]" CRST "\t\tavailable capacity: " CYN << available << CRST << std::endl;
+	}
+	else
+	{
+		from.removeMaterial("Iron", quantity);
+		to.addMaterial("Iron", quantity);
+	}
 }
