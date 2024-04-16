@@ -92,7 +92,7 @@ void	materialExchange(const std::string& material, Warehouse& from, Warehouse& t
 	}
 	else
 	{
-		from.removeMaterial("Iron", quantity);
-		to.addMaterial("Iron", quantity);
+		from.removeMaterial(material, quantity);
+		to.addMaterial(material, quantity);
 	}
 }

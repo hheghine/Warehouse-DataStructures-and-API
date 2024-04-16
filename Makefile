@@ -19,11 +19,11 @@ INCLUDES		= -Iinc \
 
 SRC				= 	main.cpp \
 					$(addprefix $(SRC_DIR), Warehouse.cpp AMaterial.cpp) \
-					$(addprefix $(MATERIALS_DIR), Iron.cpp)
+					$(addprefix $(MATERIALS_DIR), Iron.cpp Copper.cpp Lumisteel.cpp)
 
 OBJ				= $(SRC:.cpp=.o)
 CXX				= @c++
-CXXFLAGS 		= -g3 -Wall -Wextra -Werror $(INCLUDES) #-fsanitize=address
+CXXFLAGS 		= -g3 -Wall -Wextra -Werror $(INCLUDES) -fsanitize=address
 
 RM				= rm -rf
 

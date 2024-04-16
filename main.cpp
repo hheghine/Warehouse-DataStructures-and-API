@@ -1,9 +1,13 @@
 #include "Warehouse.hpp"
 #include "Iron.hpp"
+#include "Copper.hpp"
+#include "Lumisteel.hpp"
 
 int	main() {
 	Warehouse	warehouse;
 	Iron* iron = new Iron();
+	Copper* copper = new Copper();
+	Lumisteel* lumisteel = new Lumisteel();
 
 	warehouse.learnMaterial(iron);
 
@@ -19,18 +23,31 @@ int	main() {
 
 	Warehouse other;
 
-	other.learnMaterial(iron);
-	other.addMaterial("Iron", 2);
+	other.learnMaterial(copper);
+	other.addMaterial("Copper", 78);
+
+	Warehouse third;
+
+	third.learnMaterial(lumisteel);
+	third.addMaterial("Lumisteel", 777);
 
 	try {
 		materialExchange("Iron", warehouse, other, 998);
+		materialExchange("Copper", other, warehouse, 42);
+		materialExchange("Lumisteel", third, warehouse, 77);
 	} catch (const std::exception& e) {
 		std::cout << RED << e.what() << CRST << std::endl;
 	}
 
+	std::cout << BGRN "\nwarehouse:" CRST << std::endl;
 	std::cout << warehouse;
+	std::cout << BGRN "\nother:" CRST << std::endl;
 	std::cout << other;
+	std::cout << BGRN "\nthird:" CRST << std::endl;
+	std::cout << third;
 
 
 	delete iron;
+	delete copper;
+	delete lumisteel;
 }
