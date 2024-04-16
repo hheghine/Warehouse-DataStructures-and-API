@@ -22,3 +22,16 @@ Materials can be added to the warehouse, or removed from it. Materials can also 
 ## Optional:
 - Implement proper notification/observer pattern and utilize that in your architecture.
 - Add proper validation and exception handling mechanism. Make sure the warehouse always has proper/valid data no matter the input.
+
+---
+
+## Usage
+
+```
+git clone git@github.com:hheghine/Warehouse-DataStructures-and-API.git
+
+cd Warehouse-DataStructures-and-API
+
+make
+```
+Feel free to add your test cases or add your own materials ✨
