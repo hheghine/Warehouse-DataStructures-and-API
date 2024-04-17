@@ -8,8 +8,6 @@ Lumisteel::Lumisteel()
 	0)
 {}
 
-Lumisteel::~Lumisteel() {}
-
 AMaterial*	Lumisteel::clone() const
 {
 	return new Lumisteel();

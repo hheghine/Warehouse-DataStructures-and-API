@@ -3,60 +3,44 @@
 #include "Copper.hpp"
 #include "Lumisteel.hpp"
 
-int	main() {
+int	main()
+{
 	Warehouse	warehouse;
 
-	Iron* iron = new Iron();
-	Copper* copper = new Copper();
-	Lumisteel* lumisteel = new Lumisteel();
+	std::unique_ptr<Iron> iron = std::make_unique<Iron>();
+	std::unique_ptr<Copper> copper = std::make_unique<Copper>();
+	std::unique_ptr<Lumisteel> lumisteel = std::make_unique<Lumisteel>();
 
-	warehouse.learnMaterial(iron);
+	std::unique_ptr<Observer> observer1 = std::make_unique<Observer>();
+	std::unique_ptr<Observer> observer2 = std::make_unique<Observer>();
+
+	warehouse.registerObserver(observer1.get());
+	warehouse.registerObserver(observer2.get());
+
+	warehouse.learnMaterial(iron.get());
 
 	warehouse.addMaterial("Iron", 4);
-	warehouse.addMaterial("Iron", 999);
 	warehouse.addMaterial("Iron", 999);
 
 	warehouse.addMaterial("blabla", 4);
 
-	// warehouse.removeMaterial("Iron", 666);
-
-	std::cout << warehouse;
-
 	Warehouse other;
+	std::unique_ptr<Observer> observer3 = std::make_unique<Observer>();
 
-	other.learnMaterial(copper);
-	other.addMaterial("Copper", 78);
+	other.registerObserver(observer3.get());
 
-	Warehouse third;
+	other.learnMaterial(lumisteel.get());
+	other.addMaterial("Lumisteel", 777);
 
-	std::cout << CYN << "\ntesting an invalid pointer..." << CRST << std::endl;
-	try {
-		third.learnMaterial(nullptr);
-	} catch (const std::exception& e) {
-		std::cout << RED << e.what() << CRST << std::endl;
-	}
-	std::cout << std::endl;
-
-	third.learnMaterial(lumisteel);
-	third.addMaterial("Lumisteel", 777);
+	warehouse.removeObserver(observer2.get());
 
 	try {
-		materialExchange("Iron", warehouse, other, 998);
-		materialExchange("Copper", other, warehouse, 42);
-		materialExchange("Lumisteel", third, warehouse, 777);
-	} catch (const std::exception& e) {
-		std::cout << RED << e.what() << CRST << std::endl;
-	}
+			materialExchange("Iron", warehouse, other, 998);
+			materialExchange("Lumisteel", other, warehouse, 42);
+		} catch (const std::exception& e) {
+			std::cout << RED << e.what() << CRST << std::endl;
+		}
 
-	std::cout << BGRN << "\nwarehouse:" << CRST << std::endl;
-	std::cout << warehouse;
-	std::cout << BGRN << "\nother:" << CRST << std::endl;
-	std::cout << other;
-	std::cout << BGRN << "\nthird:" << CRST << std::endl;
-	std::cout << third;
-
-
-	delete iron;
-	delete copper;
-	delete lumisteel;
+	warehouse.learnMaterial(copper.get());
+	warehouse.addMaterial("Copper", 78);
 }

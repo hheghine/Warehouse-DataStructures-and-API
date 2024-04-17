@@ -8,7 +8,7 @@ class AMaterial;
 class Iron : public AMaterial {
 	public:
 		Iron();
-		~Iron();
+		~Iron() = default;
 
 		AMaterial*	clone() const;
 };

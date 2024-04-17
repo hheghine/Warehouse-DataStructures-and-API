@@ -18,7 +18,7 @@ INCLUDES		= -Iinc \
 					-Iinc/Materials
 
 SRC				= 	main.cpp \
-					$(addprefix $(SRC_DIR), Warehouse.cpp AMaterial.cpp) \
+					$(addprefix $(SRC_DIR), Warehouse.cpp AMaterial.cpp Observer.cpp) \
 					$(addprefix $(MATERIALS_DIR), Iron.cpp Copper.cpp Lumisteel.cpp)
 
 OBJ				= $(SRC:.cpp=.o)

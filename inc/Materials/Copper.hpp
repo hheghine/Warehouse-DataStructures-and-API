@@ -8,7 +8,7 @@ class AMaterial;
 class Copper : public AMaterial {
 	public:
 		Copper();
-		~Copper();
+		~Copper() = default;
 
 		AMaterial*	clone() const;
 };

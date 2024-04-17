@@ -8,8 +8,6 @@ Iron::Iron()
 		0)
 {}
 
-Iron::~Iron() {}
-
 AMaterial*	Iron::clone() const
 {
 	return new Iron();

@@ -25,7 +25,10 @@ void	Warehouse::learnMaterial(AMaterial* material)
 void	Warehouse::addMaterial(const std::string& material, const size_t quantity)
 {
 	if (warehouse.find(material) != warehouse.end())
+	{
 		warehouse[material]->addQuantity(quantity);
+		notifyObservers();
+	}
 	else
 		notifyUnknown();
 }
@@ -37,6 +40,7 @@ void	Warehouse::removeMaterial(const std::string& material, const size_t quantit
 		warehouse[material]->reduceQuantity(quantity);
 		if (getMaterialQuantity(material) == 0)
 			forgetMaterial(material);
+		notifyObservers();
 	}
 	else
 		notifyUnknown();
@@ -61,9 +65,7 @@ size_t	Warehouse::getMaterialCapacity(const std::string& material) const
 
 bool	Warehouse::isKnownMaterial(const std::string& material) const
 {
-	if (warehouse.find(material) == warehouse.end())
-		return false;
-	return true;
+	return (warehouse.find(material) != warehouse.end());
 }
 
 void	Warehouse::notifyUnknown() const
@@ -108,4 +110,22 @@ void	materialExchange(const std::string& material, Warehouse& from, Warehouse& t
 		from.removeMaterial(material, quantity);
 		to.addMaterial(material, quantity);
 	}
+}
+
+void	Warehouse::registerObserver(Observer* observer)
+{
+	observers.push_back(observer);
+}
+
+void	Warehouse::removeObserver(Observer* observer)
+{
+	observers.erase(std::remove_if(observers.begin(), observers.end(),
+							[observer](Observer* o) { return o == observer; }),
+						observers.end());
+}
+
+void	Warehouse::notifyObservers()
+{
+	for (Observer* observer : observers)
+		observer->update(*this);
 }

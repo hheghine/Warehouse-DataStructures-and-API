@@ -9,8 +9,6 @@ AMaterial::AMaterial(const std::string& name, const std::string& description, \
 	, _quantity(quantity)
 {}
 
-AMaterial::~AMaterial() {}
-
 const std::string&	AMaterial::getName() const
 {
 	return _name;

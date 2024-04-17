@@ -15,7 +15,7 @@ class AMaterial {
 		AMaterial() = delete;
 		AMaterial(const std::string& name, const std::string& description, \
 				const std::string& icon, const size_t capacity, const size_t quantity);
-		virtual ~AMaterial();
+		virtual ~AMaterial() = default;
 
 		AMaterial(const AMaterial& rhs) = delete;
 		AMaterial&	operator= (const AMaterial& rhs) = delete;

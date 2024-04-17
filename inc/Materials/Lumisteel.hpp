@@ -8,7 +8,7 @@ class AMaterial;
 class Lumisteel : public AMaterial {
 	public:
 		Lumisteel();
-		~Lumisteel();
+		~Lumisteel() = default;
 
 		AMaterial*	clone() const;
 };

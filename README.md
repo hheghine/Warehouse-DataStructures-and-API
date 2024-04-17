@@ -1,8 +1,11 @@
+# [ ⚠ IN PROGRESS... ]
 # Warehouse Data Structures and API
 >[!Note]
 >This task was provided by [**Rockbite Games**](https://rockbitegames.com/) for the purpose of showcasing OOP skills and understanding of fundamentals.
 
-<img src="https://github.com/hheghine/Warehouse-DataStructures-and-API/assets/119530584/210cb8d7-1598-42e1-ba78-db0186cf70a6" alt="inventory" width="1000" height="300">
+<p align="center">
+    <img src="https://github.com/hheghine/Warehouse-DataStructures-and-API/assets/119530584/40b50ec0-fa1f-426c-91d1-c74e1f2d07ca" alt="inventory" width="800" height="300">
+</p>
 
 ---
 

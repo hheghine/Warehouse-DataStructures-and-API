@@ -8,6 +8,7 @@
 # include <vector>
 # include <string>
 # include <memory>
+# include <algorithm>
 
 /*   COLOR CONSTANTS   */
 constexpr char WHT[] = "\033[0;37m";
@@ -26,17 +27,21 @@ constexpr char CRST[] = "\033[0m";
 
 
 # include "AMaterial.hpp"
+# include "Observer.hpp"
 
 class AMaterial;
-
+class Observer;
 
 class Warehouse {
 	public:
-		using map_iterator = std::unordered_map<std::string, std::unique_ptr<AMaterial>>::iterator;
-		using map_const_iterator = std::unordered_map<std::string, std::unique_ptr<AMaterial>>::const_iterator;
-		using map = std::unordered_map<std::string, std::unique_ptr<AMaterial>>;
+		using map_iterator			= std::unordered_map<std::string, std::unique_ptr<AMaterial>>::iterator;
+		using map_const_iterator	= std::unordered_map<std::string, std::unique_ptr<AMaterial>>::const_iterator;
+		using map					= std::unordered_map<std::string, std::unique_ptr<AMaterial>>;
+		using vec			= std::vector<Observer *>;
+		using vec_iterator	= std::vector<Observer *>::iterator;
 	private:
 		map	warehouse;
+		vec	observers;
 	public:
 		/* CONSTRUCTORS */
 		Warehouse();
@@ -69,6 +74,11 @@ class Warehouse {
 		bool		isKnownMaterial(const std::string& material) const;
 		const map&	getMap() const;
 		void		notifyUnknown() const;
+
+		/* OBSERVER */
+		void	registerObserver(Observer* observer);
+		void	removeObserver(Observer* observer);
+		void	notifyObservers();
 };
 
 std::ostream&	operator<<(std::ostream& out, const Warehouse& wh);

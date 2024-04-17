@@ -8,8 +8,6 @@ Copper::Copper()
 		0)
 {}
 
-Copper::~Copper() {}
-
 AMaterial*	Copper::clone() const
 {
 	return new Copper();
