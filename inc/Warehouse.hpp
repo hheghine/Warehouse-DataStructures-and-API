@@ -1,37 +1,40 @@
 #ifndef WAREHOUSE_HPP
 # define WAREHOUSE_HPP
 
-/*   COLOR CONSTANTS   */
-# define WHT "\033[0;37m"
-# define GRN "\033[0;32m"
-# define CYN "\033[0;36m"
-# define GRY "\033[0;90m"
-# define RED "\033[0;31m"
-# define YLW "\033[0;33m"
-
-# define BWHT "\033[1;37m"
-# define BGRN "\033[1;32m"
-# define BCYN "\033[1;36m"
-# define BGRY "\033[1;90m"
-
-# define CRST "\033[0m"
-
 /*    LIBRARIES    */
-# include <iostream>
+# include <unordered_map>
 # include <exception>
+# include <iostream>
 # include <vector>
 # include <string>
-# include <map>
+# include <memory>
+
+/*   COLOR CONSTANTS   */
+constexpr char WHT[] = "\033[0;37m";
+constexpr char GRN[] = "\033[0;32m";
+constexpr char CYN[] = "\033[0;36m";
+constexpr char GRY[] = "\033[0;90m";
+constexpr char RED[] = "\033[0;31m";
+constexpr char YLW[] = "\033[0;33m";
+
+constexpr char BWHT[] = "\033[1;37m";
+constexpr char BGRN[] = "\033[1;32m";
+constexpr char BCYN[] = "\033[1;36m";
+constexpr char BGRY[] = "\033[1;90m";
+
+constexpr char CRST[] = "\033[0m";
+
 
 # include "AMaterial.hpp"
 
-
 class AMaterial;
 
-using map_iterator = std::map<std::string, AMaterial *>::iterator;
-using map = std::map<std::string, AMaterial *>;
 
 class Warehouse {
+	public:
+		using map_iterator = std::unordered_map<std::string, std::unique_ptr<AMaterial>>::iterator;
+		using map_const_iterator = std::unordered_map<std::string, std::unique_ptr<AMaterial>>::const_iterator;
+		using map = std::unordered_map<std::string, std::unique_ptr<AMaterial>>;
 	private:
 		map	warehouse;
 	public:
@@ -42,16 +45,21 @@ class Warehouse {
 		Warehouse(const Warehouse& rhs) = delete;
 		Warehouse&	operator= (const Warehouse& rhs) = delete;
 	public:
-		/* EXCEPTION CLASS */
+		/* EXCEPTION CLASSES */
+		class MaterialException : public std::exception {
+			public:
+				const char*	what() const noexcept;
+		};
 		class ExchangeException : public std::exception {
 			public:
-				const char*	what() const throw();
+				const char*	what() const noexcept;
 		};
 	public:
 		/* MATERIAL MANIPULATIONS */
 		void	learnMaterial(AMaterial* material);
 		void	addMaterial(const std::string& material, const size_t quantity);
 		void	removeMaterial(const std::string& material, const size_t quantity);
+		void	forgetMaterial(const std::string& material);
 
 		/* GETTERS */
 		size_t	getMaterialQuantity(const std::string& material) const;

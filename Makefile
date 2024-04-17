@@ -23,7 +23,7 @@ SRC				= 	main.cpp \
 
 OBJ				= $(SRC:.cpp=.o)
 CXX				= @c++
-CXXFLAGS 		= -g3 -Wall -Wextra -Werror $(INCLUDES) -fsanitize=address
+CXXFLAGS 		= -g3 -Wall -Wextra -Werror $(INCLUDES) #-fsanitize=address
 
 RM				= rm -rf
 

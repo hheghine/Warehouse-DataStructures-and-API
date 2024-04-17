@@ -5,6 +5,7 @@
 
 int	main() {
 	Warehouse	warehouse;
+
 	Iron* iron = new Iron();
 	Copper* copper = new Copper();
 	Lumisteel* lumisteel = new Lumisteel();
@@ -28,22 +29,30 @@ int	main() {
 
 	Warehouse third;
 
+	std::cout << CYN << "\ntesting an invalid pointer..." << CRST << std::endl;
+	try {
+		third.learnMaterial(nullptr);
+	} catch (const std::exception& e) {
+		std::cout << RED << e.what() << CRST << std::endl;
+	}
+	std::cout << std::endl;
+
 	third.learnMaterial(lumisteel);
 	third.addMaterial("Lumisteel", 777);
 
 	try {
 		materialExchange("Iron", warehouse, other, 998);
 		materialExchange("Copper", other, warehouse, 42);
-		materialExchange("Lumisteel", third, warehouse, 77);
+		materialExchange("Lumisteel", third, warehouse, 777);
 	} catch (const std::exception& e) {
 		std::cout << RED << e.what() << CRST << std::endl;
 	}
 
-	std::cout << BGRN "\nwarehouse:" CRST << std::endl;
+	std::cout << BGRN << "\nwarehouse:" << CRST << std::endl;
 	std::cout << warehouse;
-	std::cout << BGRN "\nother:" CRST << std::endl;
+	std::cout << BGRN << "\nother:" << CRST << std::endl;
 	std::cout << other;
-	std::cout << BGRN "\nthird:" CRST << std::endl;
+	std::cout << BGRN << "\nthird:" << CRST << std::endl;
 	std::cout << third;
 
 

@@ -11,25 +11,6 @@ AMaterial::AMaterial(const std::string& name, const std::string& description, \
 
 AMaterial::~AMaterial() {}
 
-AMaterial::AMaterial(const AMaterial& rhs)
-{
-	operator=(rhs);
-}
-
-AMaterial&	AMaterial::operator=(const AMaterial& rhs)
-{
-	if (this != &rhs)
-	{
-		_name = rhs._name;
-		_description = rhs._description;
-		_icon= rhs._icon;
-		_max_capacity = rhs._max_capacity;
-		_quantity = rhs._quantity;
-	}
-
-	return *this;
-}
-
 const std::string&	AMaterial::getName() const
 {
 	return _name;
@@ -59,14 +40,14 @@ void	AMaterial::addQuantity(const size_t quantity)
 {
 	size_t added = _max_capacity - _quantity >= quantity ? quantity : _max_capacity - _quantity;
 	_quantity += added;
-	std::cout << _name << " material: " << GRN "+" << added << CRST \
-	"\ttotal quantity: " << CYN << _quantity << CRST << std::endl;
+	std::cout << _name << " material: " << GRN << "+" << added << CRST \
+	<< "\ttotal quantity: " << CYN << _quantity << CRST << std::endl;
 }
 
 void	AMaterial::reduceQuantity(const size_t quantity)
 {
 	size_t reduced = _quantity >= quantity ? quantity : 999;
 	_quantity -= reduced;
-	std::cout << _name << " material: " << RED "-" << reduced << CRST \
-	"\ttotal quantity: " << CYN << _quantity << CRST << std::endl;
+	std::cout << _name << " material: " << RED << "-" << reduced << CRST \
+	<< "\ttotal quantity: " << CYN << _quantity << CRST << std::endl;
 }

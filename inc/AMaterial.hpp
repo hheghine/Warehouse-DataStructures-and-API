@@ -17,8 +17,8 @@ class AMaterial {
 				const std::string& icon, const size_t capacity, const size_t quantity);
 		virtual ~AMaterial();
 
-		AMaterial(const AMaterial& rhs);
-		AMaterial&	operator= (const AMaterial& rhs);
+		AMaterial(const AMaterial& rhs) = delete;
+		AMaterial&	operator= (const AMaterial& rhs) = delete;
 
 		/* GETTERS */
 		const std::string&	getName() const;

@@ -24,6 +24,27 @@ Materials can be added to the warehouse, or removed from it. Materials can also 
 - Add proper validation and exception handling mechanism. Make sure the warehouse always has proper/valid data no matter the input.
 
 ---
+## File Hierarchy
+
+```
+Warehouse-DataStructures-and-API
+│
+├── inc
+│   ├── AMaterial.hpp
+│   ├── Materials
+│   │   ├── Copper.hpp
+│   │   ├── Iron.hpp
+│   │   └── Lumisteel.hpp
+│   └── Warehouse.hpp
+│
+└── src
+    ├── AMaterial.cpp
+    ├── Materials
+    │   ├── Copper.cpp
+    │   ├── Iron.cpp
+    │   └── Lumisteel.cpp
+    └── Warehouse.cpp
+```
 
 ## Usage
 
