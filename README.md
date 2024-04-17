@@ -33,20 +33,22 @@ Materials can be added to the warehouse, or removed from it. Materials can also 
 Warehouse-DataStructures-and-API
 │
 ├── inc
-│   ├── AMaterial.hpp
+│   ├── Warehouse.hpp
+|   ├── AMaterial.hpp
 │   ├── Materials
 │   │   ├── Copper.hpp
 │   │   ├── Iron.hpp
 │   │   └── Lumisteel.hpp
-│   └── Warehouse.hpp
+│   └── Observer.hpp
 │
 └── src
+    ├── Warehouse.cpp
     ├── AMaterial.cpp
     ├── Materials
     │   ├── Copper.cpp
     │   ├── Iron.cpp
     │   └── Lumisteel.cpp
-    └── Warehouse.cpp
+    └── Observer.cpp
 ```
 
 ## Usage
