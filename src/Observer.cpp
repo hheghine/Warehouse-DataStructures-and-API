@@ -10,10 +10,8 @@ Observer::Observer()
 
 void	Observer::update(const Warehouse& wh)
 {
-	const Warehouse::map& warehouse = wh.getMap();
-
 	std::cout << BGRN << "\n\n\t\t\t***** OBSERVER " << _id << " *****" << CRST << std::endl;
-	for (auto const& it : warehouse)
+	for (auto const& it : wh.getMap())
 	{
 		std::cout << BGRN << "+--------------------------------------------------------------------------------------+\n" << CRST \
 		<< "Material name:\t\t" << BCYN << (it.second)->getName() << std::endl \

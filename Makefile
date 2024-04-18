@@ -6,20 +6,18 @@ PINK			= \033[0;35m
 BLINK			= \033[5m
 END				= \033[0m
 
-PRINTF			= printf
-
 
 NAME			= warehouse
 
 SRC_DIR			= src/
-MATERIALS_DIR	= $(SRC_DIR)Materials/
+CONTAINERS_DIR	= $(SRC_DIR)Containers/
 
 INCLUDES		= -Iinc \
-					-Iinc/Materials
+					-Iinc/Containers
 
 SRC				= 	main.cpp \
 					$(addprefix $(SRC_DIR), Warehouse.cpp AMaterial.cpp Observer.cpp) \
-					$(addprefix $(MATERIALS_DIR), Iron.cpp Copper.cpp Lumisteel.cpp)
+					$(addprefix $(CONTAINERS_DIR), Iron.cpp Copper.cpp Lumisteel.cpp)
 
 OBJ				= $(SRC:.cpp=.o)
 CXX				= @c++
@@ -29,9 +27,12 @@ RM				= rm -rf
 
 all:		$(NAME)
 
-$(NAME):	$(OBJ) Makefile
+
+$(NAME):	Makefile
+			@printf "$(GREY)Compiling the $(END)$(WHITE)$(NAME)..."
+			@$(MAKE) -s $(OBJ)
 			@$(CXX) $(CXXFLAGS) $(OBJ) -o $(NAME)
-			@printf "$(GREY)Compiling the $(END)$(WHITE)$(NAME)... $(GREY)Greetings traveler $(END)$(BLINK)✨$(BLINK)$(END)\n\n"
+			@printf " $(GREY)Greetings traveler $(END)$(BLINK)✧₊⁺ $(BLINK)$(END)\n\n"
 
 clean:
 			@$(RM) $(OBJ)

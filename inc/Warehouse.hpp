@@ -33,15 +33,9 @@ class AMaterial;
 class Observer;
 
 class Warehouse {
-	public:
-		using map_iterator			= std::unordered_map<std::string, std::unique_ptr<AMaterial>>::iterator;
-		using map_const_iterator	= std::unordered_map<std::string, std::unique_ptr<AMaterial>>::const_iterator;
-		using map					= std::unordered_map<std::string, std::unique_ptr<AMaterial>>;
-		using vec			= std::vector<Observer *>;
-		using vec_iterator	= std::vector<Observer *>::iterator;
 	private:
-		map	warehouse;
-		vec	observers;
+		std::unordered_map<std::string, std::unique_ptr<AMaterial>>	warehouse;
+		std::vector<Observer *>	observers;
 	public:
 		/* CONSTRUCTORS */
 		Warehouse();
@@ -72,7 +66,7 @@ class Warehouse {
 
 		/* HELPER METHODS */
 		bool		isKnownMaterial(const std::string& material) const;
-		const map&	getMap() const;
+		const auto&	getMap() const { return warehouse; }
 		void		notifyUnknown() const;
 
 		/* OBSERVER */

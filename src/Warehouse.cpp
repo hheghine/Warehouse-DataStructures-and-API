@@ -48,7 +48,7 @@ void	Warehouse::removeMaterial(const std::string& material, const size_t quantit
 
 void	Warehouse::forgetMaterial(const std::string& material)
 {
-	map_iterator it = warehouse.find(material);
+	auto it = warehouse.find(material);
 	if (it != warehouse.end())
 		warehouse.erase(it);
 }
@@ -73,16 +73,9 @@ void	Warehouse::notifyUnknown() const
 	std::cout << YLW << " [ ⚠ warning ]" << CRST << "\t\tunknown material" << CRST << std::endl;
 }
 
-const Warehouse::map&	Warehouse::getMap() const
-{
-	return warehouse;
-}
-
 std::ostream&	operator<<(std::ostream& out, const Warehouse& wh)
 {
-	const Warehouse::map& warehouse = wh.getMap();
-
-	for (auto const& it : warehouse)
+	for (auto const& it : wh.getMap())
 	{
 		out << BGRY << "\n+--------------------------------------------------------------------------------------+\n" << CRST \
 		<< "Material name:\t\t" << BCYN << (it.second)->getName() << std::endl \

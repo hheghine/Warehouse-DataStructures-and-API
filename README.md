@@ -1,4 +1,3 @@
-# [ ⚠ IN PROGRESS... ]
 # Warehouse Data Structures and API
 >[!Note]
 >This task was provided by [**Rockbite Games**](https://rockbitegames.com/) for the purpose of showcasing OOP skills and understanding of fundamentals.
@@ -33,22 +32,22 @@ Materials can be added to the warehouse, or removed from it. Materials can also 
 Warehouse-DataStructures-and-API
 │
 ├── inc
-│   ├── Warehouse.hpp
-|   ├── AMaterial.hpp
-│   ├── Materials
+|   ├── Observer.hpp
+│   ├── AMaterial.hpp
+│   ├── Containers
 │   │   ├── Copper.hpp
 │   │   ├── Iron.hpp
 │   │   └── Lumisteel.hpp
-│   └── Observer.hpp
+│   └── Warehouse.hpp
 │
 └── src
-    ├── Warehouse.cpp
+    ├── Observer.cpp
     ├── AMaterial.cpp
-    ├── Materials
+    ├── Containers
     │   ├── Copper.cpp
     │   ├── Iron.cpp
     │   └── Lumisteel.cpp
-    └── Observer.cpp
+    └── Warehouse.cpp
 ```
 
 ## Usage
